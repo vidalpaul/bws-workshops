@@ -1,5 +1,7 @@
 # BWS Blockchain Workshops
 
+THIS IS A TEMPLATE BRANCH FOR WORKSHOPS BRANCHES THAT USE NESTJS + ETHERS.JS
+
 ## Introduction
 
 Welcome to the official GitHub repository for **BWS** Blockchain Workshops. This repository is designed to serve as a comprehensive resource for back-end engineers at **BWS**, facilitating the acquisition of essential skills for blockchain integration tasks. Our workshops are meticulously structured to provide both theoretical understanding and practical application of blockchain technologies in our projects.
