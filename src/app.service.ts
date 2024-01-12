@@ -1,12 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { JsonRpcProvider } from 'ethers';
 
+import { ChainInfo } from './types';
+
 @Injectable()
 export class AppService {
-  async getChainId(): Promise<string> {
+  async getChainInfo(): Promise<ChainInfo> {
     const provider = new JsonRpcProvider(process.env.NODE_URL);
     const network = await provider.getNetwork();
-    const chainId = network.chainId;
-    return chainId.toString();
+    return {
+      network: network.name,
+      chainId: network.chainId.toString(),
+    };
   }
 }
