@@ -1,0 +1,35 @@
+{
+	"info": {
+		"name": "BWS Academy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Workshops",
+			"item": [
+				{
+					"name": "1. Basics of Blockchain Integration",
+					"item": [
+						{
+							"name": "Get Chain Info",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/chaininfo",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"chaininfo"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
