@@ -22,7 +22,7 @@ Each workshop in this repository is organized into two distinct branches:
 
     Final State Branch: After completing the workshop or for reference purposes, switch to the final state branch to review the comprehensive solutions and additional insights.
 
-    Check all workshops list: [Workshops](https://github.com/vidalpaul/bws-workshops/blob/master/WORKSHOPS.md)
+Check all workshops list: [Workshops](https://github.com/vidalpaul/bws-workshops/blob/master/WORKSHOPS.md)
 
 ## Contribution Guidelines
 
