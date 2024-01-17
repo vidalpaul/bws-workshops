@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JsonRpcProvider } from 'ethers';
 
-import { BlockInfo, ChainInfo } from './types';
+import { BlockInfo, ChainInfo, TransactionInfo } from './types';
 
 @Injectable()
 export class AppService {
@@ -15,4 +15,6 @@ export class AppService {
   }
 
   async getBlockInfo(blockNumber?: number): Promise<BlockInfo> {}
+
+  async getTransactionInfo(transactionHash: string): Promise<TransactionInfo> {}
 }
