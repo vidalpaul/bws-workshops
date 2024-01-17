@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JsonRpcProvider } from 'ethers';
 
-import { ChainInfo } from './types';
+import { BlockInfo, ChainInfo } from './types';
 
 @Injectable()
 export class AppService {
@@ -13,4 +13,6 @@ export class AppService {
       chainId: network.chainId.toString(),
     };
   }
+
+  async getBlockInfo(blockNumber?: number): Promise<BlockInfo> {}
 }
