@@ -24,3 +24,9 @@ export type TransactionInfo = {
   blockHash: string;
   confirmations: number;
 };
+
+// FeeData for post-EIP-1559 networks
+export type FeeInfo = {
+  maxFeePerGas: string;
+  maxPriorityFeePerGas: string;
+};

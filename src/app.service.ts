@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JsonRpcProvider } from 'ethers';
 
-import { BlockInfo, ChainInfo, TransactionInfo } from './types';
+import { BlockInfo, ChainInfo, FeeInfo, TransactionInfo } from './types';
 
 @Injectable()
 export class AppService {
@@ -44,6 +44,16 @@ export class AppService {
       data: transaction.data,
       gasLimit: transaction.gasLimit.toString(),
       confirmations,
+    };
+  }
+
+  async getGasPrice(): Promise<FeeInfo> {
+    const provider = new JsonRpcProvider(process.env.NODE_URL);
+    const feeData = await provider.getFeeData();
+    console.log(feeData);
+    return {
+      maxFeePerGas: feeData.maxFeePerGas.toString(),
+      maxPriorityFeePerGas: feeData.maxPriorityFeePerGas.toString(),
     };
   }
 }

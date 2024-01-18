@@ -1,6 +1,6 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { AppService } from './app.service';
-import { BlockInfo, ChainInfo, TransactionInfo } from './types';
+import { BlockInfo, ChainInfo, FeeInfo, TransactionInfo } from './types';
 
 @Controller()
 export class AppController {
@@ -25,5 +25,10 @@ export class AppController {
     transactionHash?: string,
   ): Promise<TransactionInfo> {
     return this.appService.getTransactionInfo(transactionHash);
+  }
+
+  @Get('fee')
+  getFee(): Promise<FeeInfo> {
+    return this.appService.getGasPrice();
   }
 }
