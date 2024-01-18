@@ -1,6 +1,12 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { AppService } from './app.service';
-import { BlockInfo, ChainInfo, FeeInfo, TransactionInfo } from './types';
+import {
+  AccountBalance,
+  BlockInfo,
+  ChainInfo,
+  FeeInfo,
+  TransactionInfo,
+} from './types';
 
 @Controller()
 export class AppController {
@@ -30,5 +36,29 @@ export class AppController {
   @Get('fee')
   getFee(): Promise<FeeInfo> {
     return this.appService.getGasPrice();
+  }
+
+  @Get('balance/:address')
+  getBalance(
+    @Param('address')
+    address: string,
+  ): Promise<AccountBalance> {
+    return this.appService.getAccountBalance(address);
+  }
+
+  @Get('transactions/:address')
+  getTransactions(
+    @Param('address')
+    address: string,
+  ): Promise<TransactionInfo[]> {
+    return this.appService.getAccountTransactions(address);
+  }
+
+  @Get('price/:symbol')
+  getTokenPrice(
+    @Param('symbol')
+    tokenAddress: string,
+  ): Promise<number> {
+    return this.appService.getTokenPrice(tokenAddress);
   }
 }

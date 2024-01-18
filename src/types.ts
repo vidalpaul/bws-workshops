@@ -30,3 +30,10 @@ export type FeeInfo = {
   maxFeePerGas: string;
   maxPriorityFeePerGas: string;
 };
+
+export type AccountTransactions = TransactionInfo[];
+
+export type AccountBalance = {
+  address: string;
+  balance: string;
+};

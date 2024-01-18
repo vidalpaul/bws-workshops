@@ -1,7 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { JsonRpcProvider } from 'ethers';
 
-import { BlockInfo, ChainInfo, FeeInfo, TransactionInfo } from './types';
+import {
+  AccountBalance,
+  BlockInfo,
+  ChainInfo,
+  FeeInfo,
+  TransactionInfo,
+} from './types';
 
 @Injectable()
 export class AppService {
@@ -55,5 +61,45 @@ export class AppService {
       maxFeePerGas: feeData.maxFeePerGas.toString(),
       maxPriorityFeePerGas: feeData.maxPriorityFeePerGas.toString(),
     };
+  }
+
+  async getAccountBalance(address: string): Promise<AccountBalance> {
+    const provider = new JsonRpcProvider(process.env.NODE_URL);
+    const balance = (await provider.getBalance(address)).toString();
+    return {
+      address,
+      balance,
+    };
+  }
+
+  async getAccountTransactions(address: string): Promise<TransactionInfo[]> {
+    const url = `https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&sort=asc&apikey=${process.env.ETHERSCAN_API_KEY}`;
+    const response = await fetch(url);
+    const rawTxs = (await response.json()).result;
+    const txs = [];
+    rawTxs.forEach((tx) => {
+      txs.push({
+        from: tx.from,
+        to: tx.to,
+        value: tx.value,
+        gasPrice: tx.gasPrice,
+        gasLimit: tx.gas,
+        nonce: tx.nonce,
+        data: tx.input,
+        hash: tx.hash,
+        blockNumber: tx.blockNumber,
+        blockHash: tx.blockHash,
+        confirmations: tx.confirmations,
+      });
+    });
+    return txs as TransactionInfo[];
+  }
+
+  async getTokenPrice(symbol: string): Promise<number> {
+    // using coinmarketcap API
+    const url = `${process.env.COINMARKETCAP_API_URL}/v1/cryptocurrency/quotes/latest?symbol=${symbol}&convert=USD&CMC_PRO_API_KEY=${process.env.COINMARKETCAP_API_KEY}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.data[symbol].quote.USD.price;
   }
 }
